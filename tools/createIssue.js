@@ -16,14 +16,22 @@ export const createIssueTool = {
         method: "POST",
         body: JSON.stringify({ title, body }),
       });
+      
+      // Return the response in the expected format with content type 'text'
       return {
         content: [{
           type: "text",
-          text: `✅ Issue created successfully!\n- 🔹 Title: ${issue.title}\n- 🔗 [View Issue](${issue.html_url})`,
-        }],
+          text: `✅ Issue created successfully!\n- 🔹 Title: ${issue.title}\n- 🔗 [View Issue](${issue.html_url})`
+        }]
       };
     } catch (err) {
-      return { content: [{ type: "error", text: `❌ Failed to create issue: ${err.message}` }] };
+      // Return error in the expected format
+      return {
+        content: [{
+          type: "text",
+          text: `❌ Failed to create issue: ${err.message}`
+        }]
+      };
     }
   },
 };
